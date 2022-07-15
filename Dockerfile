@@ -26,6 +26,8 @@ RUN python -m venv /py && \
         --no-create-home \
         django-user
 
+RUN /py/bin/pip install django-phonenumber-field[phonenumbers]
+
 ENV PATH="/py/bin:$PATH"
 
 USER django-user
