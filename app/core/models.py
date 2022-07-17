@@ -14,10 +14,12 @@ from phonenumber_field.modelfields import PhoneNumberField
 class UserManager(BaseUserManager):
     """Manager for users"""
 
-    def create_user(self, email, phone_number, password=None, **extra_fields):
+    def create_user(self, email, password=None, **extra_fields):
         """Create, save and return a new user."""
+        if not email:
+            raise ValueError('User must have a valid email adress')
         user = self.model(email=self.normalize_email(email),
-                          phone_number=phone_number, **extra_fields)
+                          **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
@@ -27,7 +29,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     """User in the system."""
     email = models.EmailField(max_length=255, unique=True)
-    phone_number = PhoneNumberField()
+    phone_number = PhoneNumberField(unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

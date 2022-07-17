@@ -38,3 +38,11 @@ class TestModels(TestCase):
                 password='testPassword'
             )
             self.assertEqual(user.email, normalized_email)
+
+    def test_email_required_create_user(self):
+        """Test user can't be created without an email adress"""
+        with self.assertRaises(ValueError):
+            get_user_model().objects.create_user(
+                '',
+                password='testPassword'
+            )
