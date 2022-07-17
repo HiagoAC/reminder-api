@@ -46,3 +46,13 @@ class TestModels(TestCase):
                 '',
                 password='testPassword'
             )
+
+    def test_create_superuser(self):
+        "Test superuser is created sucessfully"
+        superuser = get_user_model().objects.create_superuser(
+            email='test@example.com',
+            password='testPassword'
+        )
+
+        self.assertTrue(superuser.is_superuser)
+        self.assertTrue(superuser.is_staff)
