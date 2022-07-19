@@ -25,16 +25,16 @@ class TestModels(TestCase):
     def test_normalize_email(self):
         """Test email adresses are normalized"""
         sample_emails = (
-            ('Test1@example.com', 'Test1@example.com'),
-            ('test2@EXAMPLE.com', 'test2@example.com'),
-            ('Test3@EXAMPLE.COM', 'Test3@example.com'),
-            ('test4@example.com', 'test4@example.com')
+            ('Test1@example.com', 'Test1@example.com', '+1-202-555-0130'),
+            ('test2@EXAMPLE.com', 'test2@example.com', '+1-202-555-0131'),
+            ('Test3@EXAMPLE.COM', 'Test3@example.com', '+1-202-555-0132'),
+            ('test4@example.com', 'test4@example.com', '+1-202-555-0133')
         )
 
-        for original_email, normalized_email in sample_emails:
+        for original_email, normalized_email, phone_number in sample_emails:
             user = get_user_model().objects.create_user(
                 email=original_email,
-                phone_number='+1-202-555-0111',
+                phone_number=phone_number,
                 password='testPassword'
             )
             self.assertEqual(user.email, normalized_email)
