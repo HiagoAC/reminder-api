@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'core',
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_spectacular',
     'user',
 ]
