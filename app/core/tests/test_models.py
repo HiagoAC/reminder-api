@@ -11,7 +11,7 @@ class TestModels(TestCase):
         """Test creating user with an email and phone is succesful"""
         email = 'email@example.com'
         phone_number = '+1-202-555-0111'
-        password = 'testPassword'
+        password = 'testPassword123'
         user = get_user_model().objects.create_user(
             email=email,
             phone_number=phone_number,
@@ -35,7 +35,7 @@ class TestModels(TestCase):
             user = get_user_model().objects.create_user(
                 email=original_email,
                 phone_number=phone_number,
-                password='testPassword'
+                password='testPassword123'
             )
             self.assertEqual(user.email, normalized_email)
 
@@ -51,7 +51,7 @@ class TestModels(TestCase):
         "Test superuser is created sucessfully"
         superuser = get_user_model().objects.create_superuser(
             email='test@example.com',
-            password='testPassword'
+            password='testPassword123'
         )
 
         self.assertTrue(superuser.is_superuser)
